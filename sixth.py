@@ -16,6 +16,10 @@ class LinkParser(HTMLParser):
             return
         for name, value in attrs:
             if name.lower() == "href" and value:
+                # OPRAVA: zajistit, že value je string
+                if not isinstance(value, str):
+                    continue
+
                 href = value.strip()
                 lower = href.lower()
                 if lower.startswith(("mailto:", "javascript:", "tel:", "data:")):
